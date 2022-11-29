@@ -1,0 +1,18 @@
+
+
+nav{
+    
+    background-color: red;
+}
+nav ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    
+}
+nav ul li {
+    display: flex;
+    width: 70px;
+    margin: 10px;
+    
+}

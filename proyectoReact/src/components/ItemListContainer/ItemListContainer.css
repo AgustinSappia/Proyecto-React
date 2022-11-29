@@ -1,0 +1,19 @@
+.itemListContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px;
+    
+    
+}
+.itemListContainerUl{
+    width: 40%;
+    background-color: aquamarine;
+    border: 1px solid black;
+    list-style:none;
+    padding-right: 30px;
+    padding-bottom: 20px;
+}
+.itemListContainerP{
+    border-bottom: 1px black solid;
+}
