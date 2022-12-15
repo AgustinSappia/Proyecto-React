@@ -1,20 +1,26 @@
 import { useState } from "react"
 import { useEffect } from "react"
+import { useParams } from "react-router-dom";
 import { task } from "../../helpers/gFetch"
 
 const ItemDetail = () =>{
     const [prod,setProd] = useState([]);
+    const [loading,setLoading] =useState([true])
+    const objId = useParams();
     useEffect(()=>{
-            task()
+            task(objId.prodId)
             .then(respuestaA=>{
-                setTimeout(()=>{setProd(respuestaA);},2000)
+                console.log(respuestaA)
+                setTimeout(()=>{setProd(respuestaA);setLoading(false);},1000)
+                
                 })
             .catch(respuestaE=> console.log(respuestaE));
                 
     },[])
     return(
         <div>
-            {prod.map(elemento=><div key={elemento.id} className="card w-500 mt-3">
+            {
+            loading? <h2>cargando...</h2>: prod.map(elemento=><div key={elemento.id} className="card w-500 mt-3">
                                 <div>
                                   {elemento.nombre} 
                                 </div>

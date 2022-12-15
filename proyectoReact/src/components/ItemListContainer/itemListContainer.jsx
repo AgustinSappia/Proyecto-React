@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useEffect } from "react";
 import { task } from "../../helpers/gFetch";
+import { Link, NavLink, useParams } from 'react-router-dom';
 import "./ItemListContainer.css"
 
 
@@ -12,16 +13,28 @@ const ItemListContainer = (props) => {
 
   const [products,setProducts] = useState([]);
   const [loading,setLoading] =useState([true])
+  const obj= useParams()
   useEffect(()=>{
-    task() //simulador de fetch para consultar una api
+    if (obj.categoriaProd) {
+        task() //simulador de fetch para consultar una api
     .then(respuestaAfirmativa =>{setTimeout(()=>{
-      setProducts(respuestaAfirmativa); 
+      setProducts(respuestaAfirmativa.filter(prod => prod.categoria===obj.categoriaProd)); 
       setLoading(false)
-    },3000)})
+    },1000)})
     .catch(err =>{console.log (err)})
-    .finally((console.log("no olvidar de borrar")));
-},[])
- console.log("productos",products);
+    } else {
+      task() //simulador de fetch para consultar una api
+      .then(respuestaAfirmativa =>{setTimeout(()=>{
+        setProducts(respuestaAfirmativa); 
+        setLoading(false)
+      },1000)})
+      .catch(err =>{console.log (err)})
+    }
+
+},[obj.categoriaProd])
+
+  console.log(obj.categoriaProd)
+
 
   return (
     <div className="itemListContainer">
@@ -36,11 +49,11 @@ const ItemListContainer = (props) => {
                                 <img src={prod.foto} alt={prod.nombre}></img>  
                                 </div>
                                 <div>
+                                  <Link to={`/detail/${prod.id}`}>
                                   <button>ver detalle</button>
+                                  </Link>
                                 </div>
                             </div>           )}
-        <li>{props.ele1}</li>
-        <li>{props.ele2}</li>
     </ul>
     </div>
   )
