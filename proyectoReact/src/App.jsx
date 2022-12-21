@@ -1,12 +1,14 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
+import { ContextApp } from './context/CartContext'
 
 import NavBar from './components/navBar/navBar'
-import ItemListContainer from './components/ItemListContainer/itemListContainer'
+import ItemListContainer from './containers/ItemListContainer/itemListContainer'
 import './App.css'
-import ItemDetailContainer from './components/ItemDetailContainer/ItemDetailContainer'
-import CartContainer from './components/cartContainer/CartContainer'
+import ItemDetailContainer from './containers/ItemDetailContainer/ItemDetailContainer'
+import CartContainer from './containers/cartContainer/CartContainer'
+
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "bootstrap-icons/font/bootstrap-icons.css"
@@ -18,6 +20,7 @@ function App() {
   const [count, setCount] = useState(0)
 
   return (
+    <ContextApp.Provider value={{}}>
     <BrowserRouter>
       <NavBar/>
     <Routes>
@@ -28,6 +31,7 @@ function App() {
       <Route path='*'element={<Navigate to="/" />}/>
     </Routes>
     </BrowserRouter>
+    </ContextApp.Provider>
   )
 }
 
