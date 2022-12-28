@@ -1,9 +1,14 @@
 import { useState } from "react"
+import { useContext } from "react";
 import { useEffect } from "react"
 import { useParams } from "react-router-dom";
+import { CartContext } from "../../context/CartContext";
 import { task } from "../../helpers/gFetch"
 
+
+
 const ItemDetail = () =>{
+    const {cartItems,agregarCarrito} = useContext(CartContext);
     const [prod,setProd] = useState([]);
     const [loading,setLoading] =useState([true])
     const objId = useParams();
@@ -35,6 +40,7 @@ const ItemDetail = () =>{
                                 <div>{elemento.descripcion}</div>
                             </div>   
             )}
+            
         </div>
     )
 }

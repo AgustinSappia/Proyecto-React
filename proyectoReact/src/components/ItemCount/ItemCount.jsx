@@ -2,7 +2,8 @@ import React from 'react'
 import { useState } from 'react'
 import { NavLink } from 'react-router-dom';
 
-const ItemCount = () => {
+
+const ItemCount = ({handleInter}) => {
     const stock = "5";
     const [contador,setearContador]=useState(1);
    const aumentar = () => {
@@ -16,7 +17,7 @@ const ItemCount = () => {
       setearContador(contador - 1);
     }
    }  
-
+   const handleHandleInter = ()=> handleInter(contador);      //declaro handlehandleInner para poder agregar contador a la funcion onAdd que se esta llamando HandleInner
     
   return (
     <div>
@@ -25,9 +26,10 @@ const ItemCount = () => {
         <div>{contador}</div>
         <button onClick={disminuir}>-</button>
         </div>
-        <NavLink  to= "/cart">
-        <button>agregar al carrito</button>
-        </NavLink>
+        
+        <button onClick={handleHandleInter}>agregar al carrito</button>  
+        {/* EL handleHandleInner es la funcion onAdd que se ingreso al ItemCount Con el nombre de handleInner y Usamos handleHandleInner para poder hacer que al apretar onClick la funcion se HandleInner(o tambien llamada onAdd) se pueda guardar el dato del contador */}
+      
     </div>
   )
 }
