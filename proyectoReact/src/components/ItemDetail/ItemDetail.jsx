@@ -4,6 +4,8 @@ import { useEffect } from "react"
 import { useParams } from "react-router-dom";
 import { CartContext } from "../../context/CartContext";
 import { task } from "../../helpers/gFetch"
+import ButtomCart from "../buttomCart/ButtomCart";
+import ItemCount from "../ItemCount/ItemCount";
 
 
 
@@ -12,6 +14,7 @@ const ItemDetail = () =>{
     const [prod,setProd] = useState([]);        //setear producto useState
     const [loading,setLoading] =useState([true])    //Es para setear el Loading
     const objId = useParams();  //Captura el dato de la url
+    const [inputType,setInputType] = useState("inicio") ;
     useEffect(()=>{
             task(objId.prodId)
             .then(respuestaA=>{
@@ -22,6 +25,12 @@ const ItemDetail = () =>{
             .catch(respuestaE=> console.log(respuestaE));
                 
     },[])
+    const onAdd = (contador)=>{
+
+        console.log("Usted eligio comprar: "+contador+" items")
+        setInputType("comprando")
+        
+      }
     return(
         <div>
             {
@@ -40,6 +49,14 @@ const ItemDetail = () =>{
                                 <div>{elemento.descripcion}</div>
                             </div>   
             )}
+
+{
+        inputType === "inicio" ? 
+        <ItemCount handleInter={onAdd}/>    //tengo que pasar esto al item detail para poder agregar objetos al contexto 
+         :
+        <ButtomCart/>
+      }
+      
             
         </div>
     )
