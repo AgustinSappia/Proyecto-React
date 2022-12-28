@@ -8,10 +8,10 @@ import { task } from "../../helpers/gFetch"
 
 
 const ItemDetail = () =>{
-    const {cartItems,agregarCarrito} = useContext(CartContext);
-    const [prod,setProd] = useState([]);
-    const [loading,setLoading] =useState([true])
-    const objId = useParams();
+    const {cartItems,agregarCarrito} = useContext(CartContext);     //contexto
+    const [prod,setProd] = useState([]);        //setear producto useState
+    const [loading,setLoading] =useState([true])    //Es para setear el Loading
+    const objId = useParams();  //Captura el dato de la url
     useEffect(()=>{
             task(objId.prodId)
             .then(respuestaA=>{
