@@ -1,7 +1,7 @@
 
 GitHub: https://github.com/AgustinSappia/Proyecto-React.git
 
-Deploy: https://creative-longma-747537.netlify.app/    			//Solo tienes que ingresar al link a travez de un navegador
+Deploy: https://sensational-twilight-2197e4.netlify.app 			//Solo tienes que ingresar al link a travez de un navegador
 
  "dependencies": {
     "bootstrap": "^5.2.3",   //Agrega estilos a los elementos de la app
