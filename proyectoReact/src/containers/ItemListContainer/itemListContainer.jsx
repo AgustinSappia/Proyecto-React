@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useEffect } from "react";
-import { Link, NavLink, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import "./ItemListContainer.css"
 
 import {collection, getDocs, getFirestore, query, where} from 'firebase/firestore'
@@ -56,11 +56,12 @@ const ItemListContainer = (props) => {
         <p className="itemListContainerP">{props.titulo}</p>
         {loading? <Loading/>:
         products.map(prod=> <div key={prod.id} className="card w-500 mt-3">
-                                <div>
-                                  {prod.nombre} -/- {prod.categoria}
+                                <div id="tituloObjeto">
+                                  {prod.nombre} 
                                 </div>
-                                <div>
-                                <img src={prod.foto} alt={prod.nombre}></img>  
+                                
+                                <div id="imagenObjetoDiv">
+                                <img id="imagenObjeto" src={prod.foto} alt={prod.nombre}></img>  
                                 </div>
                                 <div>
                                   <Link to={`/detail/${prod.id}`}>

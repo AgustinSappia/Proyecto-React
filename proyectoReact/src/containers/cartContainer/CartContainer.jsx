@@ -8,9 +8,8 @@ import { NavLink } from 'react-router-dom';
 
 export const CartContainer = () => {
  const {cartItems,vaciarCarrito,precioTotal,eliminarItem} = useCartContext();
- 
- const [idCompra,setIdCompra] = useState()
 
+ const [idCompra,setIdCompra] = useState()
  const [dataForm,setDataform] = useState({
   name:"",
   email:"",
@@ -32,19 +31,17 @@ export const CartContainer = () => {
 
   const dataBase = getFirestore();
   const queryOrdenes = collection(dataBase, "ordenes");
-  if (dataForm.email!== "" && dataForm.name!== "" && dataForm.phone!== ""){
+  if (dataForm.email!== "" && dataForm.name!== "" && dataForm.phone!== ""){ //todo esto es la verificacion de que no haya ningun dato vacio en el formulario
     
-    if(dataForm.email === dataForm.confirmarEmail){
+    if(dataForm.email === dataForm.confirmarEmail){ // verificaion de que los mails concuerden
       addDoc(queryOrdenes, orden)
       .then( resp => {
-        setIdCompra(resp.id)
-        salert("su compra se realizo con exito")
-        
+        setIdCompra(resp.id)  
       } )
       .catch(err => console.log(err))
       .finally(()=>{
-        vaciarCarrito();
-        setDataform({
+        vaciarCarrito();  //reseteo el carrito una vez echa la compra
+        setDataform({   //reseteo el dataForm
           name:"",
           phone:"",
           email:"",
@@ -84,7 +81,7 @@ export const CartContainer = () => {
                   <th>Producto</th>
                   <th>Cantidad</th>
                   <th>Precio unitario</th>
-                  <th>Precio total</th>
+                  <th>Precio Conjunto</th>
                 </tr>
               </thead>
               <tbody>
@@ -104,7 +101,7 @@ export const CartContainer = () => {
                 <tr>
 
                   <td colSpan={3} ></td>
-                  <td>Precio total:</td>
+                  <td className='h4'>Precio total:</td>
                   <td>${precioTotal()}</td>
                 
                 </tr>
@@ -114,8 +111,8 @@ export const CartContainer = () => {
             <button onClick={vaciarCarrito}>Vaciar Carrito</button>
             
             
-           <form onSubmit={generarOrden}>
-          <div className='form-group w-50'>
+           <form className="d-flex justify-content-center mt-5 " onSubmit={generarOrden} >
+          <div  className='form-group w-25 '  >
             <label htmlFor="">Nombre:</label>
             <input 
                   type="text" 
@@ -145,7 +142,7 @@ export const CartContainer = () => {
                   className='form-control' 
                   value={dataForm.confirmarEmail}
                   onChange={handleOnChange}/>
-            <button >generar orden</button>
+            <button className='mt-3' >generar orden</button>
           </div>
         </form> 
         

@@ -1,15 +1,14 @@
 import React from 'react'
 import ItemDetail from '../../components/ItemDetail/ItemDetail'
 import { useParams } from "react-router-dom";
-import { useState,useContext,useEffect } from 'react'
-import { CartContext } from '../../context/CartContext'
-import { task } from '../../helpers/gFetch'
-import {collection, getDoc, getDocs, getFirestore, query, where,doc} from 'firebase/firestore'
+import { useState,useEffect } from 'react'
+
+
+import { getDoc,getFirestore,doc} from 'firebase/firestore'
 
 
 const ItemDetailContainer = () => {
-  
-  const {cartItems,agregarCarrito}=useContext(CartContext)
+
   const objId = useParams();  //Captura el dato de la url
   const [loading,setLoading] =useState([true])    //Es para setear el Loading
   const [prod,setProd] = useState({});        //setear producto useState

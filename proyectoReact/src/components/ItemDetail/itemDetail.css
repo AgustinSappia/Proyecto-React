@@ -1,0 +1,23 @@
+#nombreDetail{
+    color: green;
+    font-size: 60px;
+}
+
+#categoriaDetail{
+    font-size: 20px;
+}
+
+#fotoDetail{
+    width: 200px;
+    height: 200px;
+}
+#precioDetail{
+    font-weight: 700;
+}
+#stockDetail{
+    font-weight: 700;
+}
+#descripcionDetail{
+   font-weight: 700;
+   border: 1px solid black;  
+}

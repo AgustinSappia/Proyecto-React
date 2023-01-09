@@ -1,5 +1,4 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
+
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
 
 
@@ -18,14 +17,12 @@ import "bootstrap-icons/font/bootstrap-icons.css"
 
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <CartContextProvider>
       <BrowserRouter>
         <NavBar/>
         <Routes>
-          <Route path='/' element={<ItemListContainer titulo="Soy un ItemListContainer"/>} />
+          <Route path='/' element={<ItemListContainer titulo="Objetos :D"/>} />
           <Route path='/detail/:prodId' element={<ItemDetailContainer/>} />
           <Route path='/categoria/:categoriaProd' element={<ItemListContainer/>}/>
           <Route path='/cart' element={<CartContainer/>}/>

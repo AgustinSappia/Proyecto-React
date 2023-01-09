@@ -5,6 +5,8 @@ import ButtomCart from "../buttomCart/ButtomCart";
 import ItemCount from "../ItemCount/ItemCount";
 import Loading from "../loading/loading";
 
+import "./itemDetail.css"
+
 
 const ItemDetail = ({product,loading}) =>{
   const {agregarCarrito} = useCartContext();
@@ -24,19 +26,19 @@ const ItemDetail = ({product,loading}) =>{
 
              {
 
-               producto.map(elemento => <div key={`key-${elemento.id}`}  className="card w-500 mt-3">
+               producto.map(elemento => <div key={`key-${elemento.id}`} >
                                 <div>
-                                  {elemento.nombre} 
+                                  <h2 id="nombreDetail">{elemento.nombre} </h2>
                                 </div>
-                                <div>categoria:  {elemento.categoria}</div>
-                                <div>
-                                <img src={elemento.foto} alt={elemento.nombre}></img>  
+                                <div> <h3 id="categoriaDetail">categoria: {elemento.categoria}</h3>  </div>
+                                <div id="fotoDivDetail">
+                                <img id="fotoDetail"  src={elemento.foto} alt={elemento.nombre}></img>  
                                 </div>
-                                <div>
+                                <div id="precioDetail">
                                   ${elemento.precio}
                                 </div>
-                                <div>stock:{elemento.stock}</div>
-                                <div>{elemento.descripcion}</div>
+                                <div id="stockDetail">stock:{elemento.stock}</div>
+                                <div id="descripcionDetail">{elemento.descripcion}</div>
                             </div>   
             )
           }

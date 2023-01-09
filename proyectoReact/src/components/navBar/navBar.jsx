@@ -26,7 +26,7 @@ export const NavBar = () => {
               Cubiertos
               </NavLink>
             <NavDropdown.Divider />
-            <NavLink  to= "/cart"  className={({isActive})=> isActive? "btn btn-success ":"btn btn-light "} href="#action/3.4">
+            <NavLink  to= "/home"  className={({isActive})=> isActive? "btn btn-success ":"btn btn-light "} href="#action/3.4">
               Catálogo Completo
             </NavLink>
           </NavDropdown>
