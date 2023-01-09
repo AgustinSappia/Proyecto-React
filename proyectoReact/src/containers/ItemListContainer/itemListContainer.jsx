@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useEffect } from "react";
-import { task } from "../../helpers/gFetch";
 import { Link, NavLink, useParams } from 'react-router-dom';
 import "./ItemListContainer.css"
 
 import {collection, getDocs, getFirestore, query, where} from 'firebase/firestore'
+import Loading from "../../components/loading/loading";
 
 
 
@@ -14,27 +14,11 @@ const ItemListContainer = (props) => {
   const [products,setProducts] = useState([]);
   const [loading,setLoading] =useState([true])
   const obj= useParams()
-//   useEffect(()=>{
-//     if (obj.categoriaProd) {
-//         task() //simulador de fetch para consultar una api
-//     .then(respuestaAfirmativa =>{setTimeout(()=>{
-//       setProducts(respuestaAfirmativa.filter(prod => prod.categoria===obj.categoriaProd)); 
-//       setLoading(false)
-//     },1000)})
-//     .catch(err =>{console.log (err)})
-//     } else {
-//       task() //simulador de fetch para consultar una api
-//       .then(respuestaAfirmativa =>{setTimeout(()=>{
-//         setProducts(respuestaAfirmativa); 
-//         setLoading(false)
-//       },1000)})
-//       .catch(err =>{console.log (err)})
-//     }
 
-// },[obj.categoriaProd])
 
     
     useEffect(()=>{
+      setLoading(true)
       const dataBase = getFirestore();
       const buscarColeccion = collection(dataBase,"productos");
       if(obj.categoriaProd === undefined){        //consulto si quiero que se muestren todos los productos o se tienen que ver filtrado
@@ -56,7 +40,7 @@ const ItemListContainer = (props) => {
           .catch(err=> console.log(err))
           .finally(()=> setLoading(false))
       }
-    },[])
+    },[obj])
   
 
   
@@ -70,7 +54,7 @@ const ItemListContainer = (props) => {
     <div className="itemListContainer">
     <ul className="itemListContainerUl">
         <p className="itemListContainerP">{props.titulo}</p>
-        {loading? <h2>cargando...</h2>:
+        {loading? <Loading/>:
         products.map(prod=> <div key={prod.id} className="card w-500 mt-3">
                                 <div>
                                   {prod.nombre} -/- {prod.categoria}

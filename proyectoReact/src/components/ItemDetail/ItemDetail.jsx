@@ -1,36 +1,30 @@
 import { useState } from "react"
-import { useEffect } from "react"
-import { useParams } from "react-router-dom";
 import { useCartContext } from "../../context/CartContext";
 
-import { task } from "../../helpers/gFetch"
 import ButtomCart from "../buttomCart/ButtomCart";
 import ItemCount from "../ItemCount/ItemCount";
+import Loading from "../loading/loading";
 
 
 const ItemDetail = ({product,loading}) =>{
-  const {cartItems,agregarCarrito} = useCartContext();
-
+  const {agregarCarrito} = useCartContext();
     const [inputType,setInputType] = useState("inicio") ;
     const producto= [product];   // saco el objeto del array (es la unica solucion que  encontre despues de 3 horas)
 
-    const onAdd = (contador)=>{
-     
-        //console.log(agregarCarrito)
-        
+    const onAdd = (contador)=>{       
         agregarCarrito({...product,contador});//tengo que pasarlo con llaves porque en el contexto la funcion recibe un array
-        console.log(cartItems)
         setInputType("comprando")
       }
-
+    
+      
     return(
         <div>
             {// el loading esta abarcando desde el detalle hasta el producto, esto es para evitar que se pueda agregar productos al carrito antes de que se carguen los mismos
-            loading? <h2>cargando...</h2>: <div>    
+            loading? <Loading/>: <div>    
 
              {
 
-               producto.map(elemento => <div key={elemento.id} className="card w-500 mt-3">
+               producto.map(elemento => <div key={`key-${elemento.id}`}  className="card w-500 mt-3">
                                 <div>
                                   {elemento.nombre} 
                                 </div>

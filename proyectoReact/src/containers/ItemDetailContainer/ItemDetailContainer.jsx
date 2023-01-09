@@ -23,7 +23,7 @@ const ItemDetailContainer = () => {
                           setProd({id:respuesta.id , ...respuesta.data() })                       
                         })
                         .catch(err=> console.log(err))
-                        .finally(setLoading(false))
+                        .finally(setTimeout(()=>{setLoading(false)},500) )
                         
   },[])
 

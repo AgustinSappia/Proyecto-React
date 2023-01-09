@@ -9,11 +9,11 @@ export const CartContextProvider = ({children})=>{
     
     const agregarCarrito = (producto) =>
              {
-                console.log(producto)
-                
+              
+             
                const encontradoProducto = cartItems.filter(elemento => elemento.id===producto.id); // encuentro si el elemento esta repetido
                  if(encontradoProducto.length>0){
-                    console.log(encontradoProducto)
+                    
                     const elemento=encontradoProducto[0];
                     elemento.contador = elemento.contador + producto.contador ;
                     setCartItems([...cartItems]);       // con esto me aseguro que se renderice otra vez, se nota la diferencia en el logo del carrito, si esto no estubiera el logo no se actualizaria

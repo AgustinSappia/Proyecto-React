@@ -5,10 +5,10 @@ const ButtomCart = () => {
   return (
     <div>
       <Link to="/">
-        <button>Seguir Comprando</button>
+        <button>Keep buying</button>
       </Link>
       <Link to="/cart">
-        <button>Ir al Carrito</button>
+        <button>Go to te Cart</button>
       </Link>
     </div>
 
