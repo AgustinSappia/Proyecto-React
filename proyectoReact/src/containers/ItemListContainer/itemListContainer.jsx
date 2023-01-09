@@ -4,7 +4,7 @@ import { task } from "../../helpers/gFetch";
 import { Link, NavLink, useParams } from 'react-router-dom';
 import "./ItemListContainer.css"
 
-
+import {collection, getDocs, getFirestore, query, where} from 'firebase/firestore'
 
 
 
@@ -14,26 +14,56 @@ const ItemListContainer = (props) => {
   const [products,setProducts] = useState([]);
   const [loading,setLoading] =useState([true])
   const obj= useParams()
-  useEffect(()=>{
-    if (obj.categoriaProd) {
-        task() //simulador de fetch para consultar una api
-    .then(respuestaAfirmativa =>{setTimeout(()=>{
-      setProducts(respuestaAfirmativa.filter(prod => prod.categoria===obj.categoriaProd)); 
-      setLoading(false)
-    },1000)})
-    .catch(err =>{console.log (err)})
-    } else {
-      task() //simulador de fetch para consultar una api
-      .then(respuestaAfirmativa =>{setTimeout(()=>{
-        setProducts(respuestaAfirmativa); 
-        setLoading(false)
-      },1000)})
-      .catch(err =>{console.log (err)})
-    }
+//   useEffect(()=>{
+//     if (obj.categoriaProd) {
+//         task() //simulador de fetch para consultar una api
+//     .then(respuestaAfirmativa =>{setTimeout(()=>{
+//       setProducts(respuestaAfirmativa.filter(prod => prod.categoria===obj.categoriaProd)); 
+//       setLoading(false)
+//     },1000)})
+//     .catch(err =>{console.log (err)})
+//     } else {
+//       task() //simulador de fetch para consultar una api
+//       .then(respuestaAfirmativa =>{setTimeout(()=>{
+//         setProducts(respuestaAfirmativa); 
+//         setLoading(false)
+//       },1000)})
+//       .catch(err =>{console.log (err)})
+//     }
 
-},[obj.categoriaProd])
+// },[obj.categoriaProd])
 
-  console.log(obj.categoriaProd)
+    
+    useEffect(()=>{
+      const dataBase = getFirestore();
+      const buscarColeccion = collection(dataBase,"productos");
+      if(obj.categoriaProd === undefined){        //consulto si quiero que se muestren todos los productos o se tienen que ver filtrado
+
+        getDocs(buscarColeccion)
+        .then(respuesta => setProducts(respuesta.docs.map(elemento =>({id:elemento.id, ...elemento.data()}))))    //todo esto en detalle en el video firebase I minutio 1:20:00
+        .catch(err=> console.log(err))
+        .finally(()=> setLoading(false))
+      }
+      else{
+         const busquedaFiltrada = 
+                                  query(   //aplicamos un filtro
+                                     buscarColeccion,    // aqui va de donde lo va a filtrar
+                                     where("categoria","==",obj.categoriaProd) //esto es como lo va a filtrar  (busca que la categoria sea igual a taza)
+                                   )
+  
+        getDocs(busquedaFiltrada)
+          .then(respuesta => setProducts(respuesta.docs.map(elemento =>({id:elemento.id, ...elemento.data()}))))    //todo esto en detalle en el video firebase I minutio 1:20:00
+          .catch(err=> console.log(err))
+          .finally(()=> setLoading(false))
+      }
+    },[])
+  
+
+  
+
+
+
+ 
 
 
   return (

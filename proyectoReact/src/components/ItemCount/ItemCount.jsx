@@ -3,11 +3,16 @@ import { useState } from 'react'
 import { NavLink } from 'react-router-dom';
 
 
-const ItemCount = ({handleInter}) => {
-    const stock = "5";
+const ItemCount = ({handleInter,producto}) => {
+  
+  var stock = "5"   //declaro un stock cualquiera antes de todo para que no se rompa si no se carga un producto
+  if(producto !== undefined){     // pregunto si el producto ya se definio
+    stock=producto.stock;// asigno el stock
+  }
+    
     const [contador,setearContador]=useState(1);
    const aumentar = () => {
-    if(contador<=stock){
+    if(contador<stock){
       
       setearContador(contador + 1);
     }
