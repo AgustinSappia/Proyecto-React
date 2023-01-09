@@ -1,6 +1,6 @@
 import React from 'react'
 import ItemDetail from '../../components/ItemDetail/ItemDetail'
-import { useParams } from "react-router-dom";
+import { useParams,NavLink } from "react-router-dom";
 import { useState,useEffect } from 'react'
 
 
@@ -29,7 +29,12 @@ const ItemDetailContainer = () => {
   return (
     
     <div>
-      <ItemDetail  product={prod} loading={loading}/>     
+      {prod.nombre? <ItemDetail  product={prod} loading={loading}/>  : 
+      <div>
+         <p>el producto no existe</p> 
+         <NavLink to="/home" className='btn btn-success p-2 d-inline-block w-25 text-white' >home</NavLink>
+         </div> }
+         
       </div>
   )
 }
